@@ -140,7 +140,7 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 
-ACCOUNT_ATHENTICATION_METHODS = ['email', 'username']
+ACCOUNT_ATHENTICATION_METHOD = "username_email"
 ACCOUNT_SIGNUP_FIELDS = ["email", "username", "password1", "password2"]
 
 AUTHENTICATION_BACKENDS = [

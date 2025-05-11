@@ -34,3 +34,25 @@ class RitualRequest(models.Model):
 
     def __str__(self):
         return f"Ritual request from {self.full_name} - {self.intention}"  
+    
+# 4. Dream interpretation request
+class DreamSubmission(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    dream_description = models.TextField()
+    recurring = models.BooleanField(default=False)
+    submitted_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Dream by {self.full_name}"
+
+# 5. Medium Contact
+class MediumContactRequest(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    focus_area = models.CharField(max_length=100, blank=True, null=True)
+    submitted_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Medium contact from {self.full_name}"

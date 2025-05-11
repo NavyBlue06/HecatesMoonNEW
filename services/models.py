@@ -11,8 +11,8 @@ class BirthChartRequest(models.Model):
     question = models.TextField(blank=True, null=True)
     submitted_on = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-       return f"Birth chart for {self.full_name} ({self.email})"return f"Birth chart for {self.full_name} ({self.email})"
-    
+       return f"Birth chart for {self.full_name} ({self.email})"
+     
     # 2. Ask a witch request
 class WitchQuestion(models.Model):
     full_name = models.CharField(max_length=100)

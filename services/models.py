@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 # 1. birthchart reading request
 class BirthChartRequest(models.Model):
-    name = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=100)
     email = models.EmailField()
     birth_date = models.DateField()
     birth_time = models.TimeField()
@@ -13,7 +13,7 @@ class BirthChartRequest(models.Model):
     def __str__(self):
        return f"Birth chart for {self.full_name} ({self.email})"
      
-    # 2. Ask a witch request
+# 2. Ask a witch request
 class WitchQuestion(models.Model):
     full_name = models.CharField(max_length=100)
     email = models.EmailField()

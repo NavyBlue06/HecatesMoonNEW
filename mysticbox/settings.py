@@ -141,7 +141,7 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 
-ACCOUNT_LOGIN_METHODS = {'username', 'email'}
+ACCOUNT_LOGIN_METHOD = 'username_email'
 
 ACCOUNT_SIGNUP_FIELDS = ["email", "username", "password1", "password2"]
 

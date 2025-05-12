@@ -23,5 +23,6 @@ urlpatterns = [
     path('', include('home.urls')),  # Include home app URLs
     path('boxes/', include('boxes.urls')),  # Include boxes app URLs
     path('cart/', include('cart.urls')),  # Include cart app URLs
+    path('services/', include('services.urls')),
 
 ]

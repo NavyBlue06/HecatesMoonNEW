@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 <div class="container mt-5 pt-5">
@@ -9,14 +10,31 @@
         {% for product in boxes %}
         <div class="col">
             <div class="card h-100 bg-dark text-light border-light">
-                {% if product.image %}
-                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                {% if product.name == "Ancestral Connection" %}
+                <img src="{% static 'images/ancestral_Connection.png' %}" class="card-img-top" alt="{{ product.name }}">
+                {% elif product.name == "Full Moon Release" %}
+                <img src="{% static 'images/full_moon_release.png' %}" class="card-img-top" alt="{{ product.name }}">
+                {% elif product.name == "Glamour Magick" %}
+                <img src="{% static 'images/glamour_magick.png' %}" class="card-img-top" alt="{{ product.name }}">
+                {% elif product.name == "Love Attraction" %}
+                <img src="{% static 'images/love_attraction.png' %}" class="card-img-top" alt="{{ product.name }}">
+                {% elif product.name == "Manifestation" %}
+                <img src="{% static 'images/manifestation.png' %}" class="card-img-top" alt="{{ product.name }}">
+                {% elif product.name == "Money Spell" %}
+                <img src="{% static 'images/Money_spell.png' %}" class="card-img-top" alt="{{ product.name }}">
+                {% elif product.name == "Protection" %}
+                <img src="{% static 'images/protection.png' %}" class="card-img-top" alt="{{ product.name }}">
+                {% elif product.name == "Relation Reparation" %}
+                <img src="{% static 'images/Relation_reparation.png' %}" class="card-img-top" alt="{{ product.name }}">
+                {% elif product.name == "Return to Sender" %}
+                <img src="{% static 'images/return_to_sender.png' %}" class="card-img-top" alt="{{ product.name }}">
+                {% elif product.name == "Road Blockage Removal" %}
+                <img src="{% static 'images/road_blockage_Removal.png' %}" class="card-img-top" alt="{{ product.name }}">
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">{{ product.description|truncatewords:20 }}</p>
                     <p class="card-text"><strong>€{{ product.price }}</strong></p>
-                    <!-- You can add a "View More" or "Add to Cart" button here -->
                 </div>
             </div>
         </div>
@@ -24,29 +42,3 @@
         <p class="text-light">No ritual boxes available.</p>
         {% endfor %}
     </div>
-
-    <!-- Magical Items -->
-    <h2 class="text-light mt-5 mb-4">🔮 Magical Items</h2>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for product in items %}
-        <div class="col">
-            <div class="card h-100 bg-dark text-light border-light">
-                {% if product.image %}
-                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">{{ product.description|truncatewords:20 }}</p>
-                    <p class="card-text"><strong>€{{ product.price }}</strong></p>
-                    <!-- Add to cart button could go here too -->
-                </div>
-            </div>
-        </div>
-        {% empty %}
-        <p class="text-light">No magical items available.</p>
-        {% endfor %}
-    </div>
-
-</div>
-{% endblock %}
-

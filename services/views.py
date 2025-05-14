@@ -7,7 +7,8 @@ from .forms import (
     MediumContactForm
     )
 # Create your views here.
-
+def services_home(request):
+    return render(request, 'services/services.html')
 def birth_chart_request(request):
     if request.method == 'POST':
         form = BirthChartRequestForm(request.POST)

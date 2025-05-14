@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <h1 class="text-light mb-4">🔮 Magical Services</h1>
+    <p class="text-light">Choose a service to begin your spiritual journey:</p>
+    <ul class="list-unstyled mt-4">
+        <li><a href="{% url 'birth_chart' %}" class="text-decoration-none text-warning">✨ Birth Chart Reading</a></li>
+        <li><a href="{% url 'ask_a_witch' %}" class="text-decoration-none text-warning">🧙 Ask a Witch</a></li>
+        <li><a href="{% url 'ritual_request' %}" class="text-decoration-none text-warning">🔥 Ritual / Spell Request</a></li>
+        <li><a href="{% url 'dream_interpretation' %}" class="text-decoration-none text-warning">💤 Dream Interpretation</a></li>
+        <li><a href="{% url 'medium_contact' %}" class="text-decoration-none text-warning">👻 Medium Contact</a></li>
+    </ul>
+</div>
+{% endblock %}

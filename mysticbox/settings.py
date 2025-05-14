@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'home',  # hecate shop
     'boxes',  # hecate boxes
     'cart', # hecate cart
-    'services' # hecate services
+    'services', # hecate services
+    'hecatemarket', # hecate market
 
 
 ]

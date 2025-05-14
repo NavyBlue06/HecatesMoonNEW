@@ -26,6 +26,8 @@ urlpatterns = [
     path('boxes/', include('boxes.urls')),  # Include boxes app URLs
     path('cart/', include('cart.urls')),  # Include cart app URLs
     path('services/', include('services.urls')),
+    path('market/', include('hecatemarket.urls')),
+
 ]
 # Serve static and media files in development
 if settings.DEBUG:

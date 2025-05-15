@@ -47,5 +47,10 @@ def services_home(request):
         'ritual_form': RitualRequestForm(),
         'dream_form': DreamSubmissionForm(),
         'medium_form': MediumContactForm(),
+        'birth_chart_price': 60,
+        'ask_a_witch_price': 45,
+        'ritual_request_price': 60,
+        'dream_interpretation_price': 50,
+        'medium_contact_price': 100,
     }
     return render(request, 'services/services.html', context)

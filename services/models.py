@@ -11,6 +11,7 @@ class BirthChartRequest(models.Model):
     question = models.TextField(blank=True, null=True)
     submitted_on = models.DateTimeField(auto_now_add=True)
     paid = models.BooleanField(default=False)
+    price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
 
     def __str__(self):
        return f"Birth chart for {self.full_name} ({self.email})"
@@ -22,6 +23,7 @@ class WitchQuestion(models.Model):
     question = models.TextField()
     submitted_on = models.DateTimeField(auto_now_add=True)
     paid = models.BooleanField(default=False)
+    price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
 
     def __str__(self):
         return f"Question from {self.full_name}"  
@@ -35,6 +37,7 @@ class RitualRequest(models.Model):
     urgency = models.CharField(max_length=50, choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')])
     submitted_on = models.DateTimeField(auto_now_add=True)
     paid = models.BooleanField(default=False)
+    price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
 
     def __str__(self):
         return f"Ritual request from {self.full_name} - {self.intention}"  
@@ -47,6 +50,8 @@ class DreamSubmission(models.Model):
     recurring = models.BooleanField(default=False)
     submitted_on = models.DateTimeField(auto_now_add=True)
     paid = models.BooleanField(default=False)
+    price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
+
     def __str__(self):
         return f"Dream by {self.full_name}"
 
@@ -58,6 +63,7 @@ class MediumContactRequest(models.Model):
     focus_area = models.CharField(max_length=100, blank=True, null=True)
     submitted_on = models.DateTimeField(auto_now_add=True)
     paid = models.BooleanField(default=False)
+    price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
 
     def __str__(self):
         return f"Medium contact from {self.full_name}"

@@ -1,8 +1,6 @@
 from django.shortcuts import render
+from .cart import Cart
 
-# Create your views here.
-from django.shortcuts import render
-
-def cart_view(request):
-    return render(request, 'cart/cart.html')
-
+def cart_detail(request):
+    cart = Cart(request)
+    return render(request, 'cart/cart_detail.html', {'cart': cart})

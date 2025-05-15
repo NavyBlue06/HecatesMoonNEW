@@ -10,26 +10,8 @@
         {% for product in boxes %}
         <div class="col">
             <div class="card h-100 bg-dark text-light border-light">
-                {% if product.name == "Ancestral Connection" %}
-                <img src="{% static 'images/ancestral_Connection.png' %}" class="card-img-top" alt="{{ product.name }}">
-                {% elif product.name == "Full Moon Release" %}
-                <img src="{% static 'images/full_moon_release.png' %}" class="card-img-top" alt="{{ product.name }}">
-                {% elif product.name == "Glamour Magick" %}
-                <img src="{% static 'images/glamour_magick.png' %}" class="card-img-top" alt="{{ product.name }}">
-                {% elif product.name == "Love Attraction" %}
-                <img src="{% static 'images/love_attraction.png' %}" class="card-img-top" alt="{{ product.name }}">
-                {% elif product.name == "Manifestation" %}
-                <img src="{% static 'images/manifestation.png' %}" class="card-img-top" alt="{{ product.name }}">
-                {% elif product.name == "Money Spell" %}
-                <img src="{% static 'images/Money_spell.png' %}" class="card-img-top" alt="{{ product.name }}">
-                {% elif product.name == "Protection" %}
-                <img src="{% static 'images/protection.png' %}" class="card-img-top" alt="{{ product.name }}">
-                {% elif product.name == "Relation Reparation" %}
-                <img src="{% static 'images/Relation_reparation.png' %}" class="card-img-top" alt="{{ product.name }}">
-                {% elif product.name == "Return to Sender" %}
-                <img src="{% static 'images/return_to_sender.png' %}" class="card-img-top" alt="{{ product.name }}">
-                {% elif product.name == "Road Blockage Removal" %}
-                <img src="{% static 'images/road_blockage_Removal.png' %}" class="card-img-top" alt="{{ product.name }}">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>

@@ -1,11 +1,10 @@
-import uuid # generate unique order numbers
+import uuid  # generate unique order numbers
 from django.db import models
-from django.db.models import Sum # for order total
+from django.db.models import Sum  # for order total
 from django.conf import settings
 from boxes.models import Product
+from django_countries.fields import CountryField  #  for dropdown countries
 
-
-# Create your models here.
 
 class Order(models.Model):
     # unique ID generated for each order
@@ -14,13 +13,15 @@ class Order(models.Model):
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
+
     # delivery address fields
-    country = models.CharField(max_length=40, null=False, blank=False)
+    country = CountryField(blank_label='(Select country)', null=False, blank=False)  # ✅ changed from CharField
     postcode = models.CharField(max_length=20, null=True, blank=True)
     town_or_city = models.CharField(max_length=40, null=False, blank=False)
     street_address1 = models.CharField(max_length=80, null=False, blank=False)
     street_address2 = models.CharField(max_length=80, null=True, blank=True)
     county = models.CharField(max_length=80, null=True, blank=True)
+
     # Order creation date and time
     date = models.DateTimeField(auto_now_add=True)
     
@@ -29,15 +30,14 @@ class Order(models.Model):
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
 
-
-    #Create a unique order number
+    # Create a unique order number
     def _generate_order_number(self):
         return uuid.uuid4().hex.upper()
 
     # Sums the total of all line items in the order
     def update_total(self):
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
-        #check if the order total is less than the free delivery threshold
+        # check if the order total is less than the free delivery threshold
         if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
             self.delivery_cost = self.order_total * settings.STANDARD_DELIVERY_PERCENTAGE / 100
         else:

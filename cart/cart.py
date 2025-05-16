@@ -42,22 +42,22 @@ class Cart:
         self.session.modified = True
 
     def __iter__(self):
-        # This lets me loop through items in the cart in the template
-
         for key, item in self.cart.items():
-            # Compute total price for this item (price × quantity)
-            item['total_price'] = Decimal(item['price']) * item['quantity']
+            if key.startswith('service-'):
+                # It's a service item, already contains name & price
+                item['key'] = key
+                item['total_price'] = Decimal(item['price']) * item['quantity']
+                yield item
+            else:
+                # It's a product from Product model
+                product = Product.objects.get(id=key)
+                item['product'] = product
+                item['name'] = product.name
+                item['key'] = key
+                item['total_price'] = Decimal(item['price']) * item['quantity']
+                yield item
 
-            # Yield a full item dict that templates can use
-            yield {
-                'key': key,  # e.g. 'service-birthchart-2'
-                'name': item.get('name', 'Unnamed'),  # human-readable name
-                'price': Decimal(item['price']),
-                'quantity': item['quantity'],
-                'total_price': item['total_price'],
-                'type': item.get('type', 'product'),  # defaults to product
-                'service_id': item.get('service_id'),  # useful later if I want to link to the service
-            }
+
 
     def get_total_price(self):
         # Total cost of everything in the cart

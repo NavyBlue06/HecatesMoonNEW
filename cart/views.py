@@ -13,3 +13,11 @@ def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart.add(product=product)
     return redirect('cart')
+
+# remove from cart
+def remove_from_cart(request, key):
+    cart = Cart(request)
+    if key in cart.cart:
+        del cart.cart[key]
+        cart.save()
+    return redirect('cart')

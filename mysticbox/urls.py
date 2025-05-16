@@ -27,6 +27,7 @@ urlpatterns = [
     path('cart/', include('cart.urls')),  # Include cart app URLs
     path('services/', include('services.urls')),
     path('market/', include('hecatemarket.urls')),
+    path('checkout/', include('checkout.urls')),  # Include checkout app URLs
 
 ]
 # Serve static and media files in development

@@ -2,16 +2,20 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-
 {% block content %}
 <div class="container mt-5 pt-5">
     <h2 class="text-light">🧾 Checkout</h2>
 
     <div class="row">
         <div class="col-md-6">
-            <form method="POST">
+            <form method="POST" id="payment-form">
                 {% csrf_token %}
                 {{ form|crispy }}
+
+                <!-- Stripe Card Element -->
+                <div id="card-element" class="my-3"></div>
+                <div id="card-errors" class="text-danger mt-2" role="alert"></div>
+
                 <button type="submit" class="btn btn-success mt-3 w-100">Complete Order</button>
             </form>
         </div>
@@ -30,4 +34,14 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Stripe JS -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const stripePublicKey = "{{ stripe_public_key }}";
+    const clientSecret = "{{ client_secret }}";
+</script>
+<script src="{% static 'js/stripe_elements.js' %}"></script>
 {% endblock %}

@@ -8,7 +8,7 @@
         <ul class="list-group">
             {% for item in cart %}
             <li class="list-group-item bg-dark text-light">
-                {{ item.product.name }} × {{ item.quantity }} = €{{ item.total_price }}
+                {{ item.name }} × {{ item.quantity }} = €{{ item.total_price }}
             </li>
             {% endfor %}
         </ul>

@@ -6,7 +6,8 @@ class OrderForm(forms.ModelForm):
         model = Order
         fields = (
             'full_name', 'email', 'phone_number',
-            'address1', 'address2', 'city', 'postcode', 'country', 'county',
+            'country', 'postcode', 'town_or_city',
+            'street_address1', 'street_address2', 'county',
         )
 
         widgets = {

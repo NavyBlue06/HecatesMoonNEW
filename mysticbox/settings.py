@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'checkout',  #  Just added for Stripe 
     'crispy_bootstrap4',
     'crispy_forms',  # For better form styling
+    'django_countries',  # For country selection in forms
 ]
 
 # --- Middleware ---

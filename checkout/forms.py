@@ -1,4 +1,5 @@
 from django import forms
+from django_countries.widgets import CountrySelectWidget
 from .models import Order
 
 class OrderForm(forms.ModelForm):
@@ -9,7 +10,6 @@ class OrderForm(forms.ModelForm):
             'country', 'postcode', 'town_or_city',
             'street_address1', 'street_address2', 'county',
         )
-
         widgets = {
-            'country': forms.Select(attrs={'class': 'form-select'}),
+            'country': CountrySelectWidget(attrs={'class': 'form-select'}),
         }

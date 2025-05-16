@@ -114,6 +114,7 @@ CART_SESSION_ID = 'cart'
 # --- Stripe (placeholders for now, will be securely read later from env or form setup) ---
 STRIPE_PUBLIC_KEY = 'your-public-key-here'
 STRIPE_SECRET_KEY = 'your-secret-key-here'
+STRIPE_WH_SECRET = 'your-webhook-secret-here'
 
 # --- Email backend (for later: confirmation emails) ---
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # change in prod

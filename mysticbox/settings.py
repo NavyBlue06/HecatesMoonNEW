@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'cart',
     'services',
     'hecatemarket',
-    'checkout',  #  Just added for Stripe Orders
+    'checkout',  #  Just added for Stripe 
+    'crispy_forms',  # For better form styling
 ]
 
 # --- Middleware ---
@@ -114,3 +115,4 @@ STRIPE_SECRET_KEY = 'your-secret-key-here'
 
 # --- Email backend (for later: confirmation emails) ---
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # change in prod
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -20,9 +20,19 @@
             </li>
             {% endfor %}
         </ul>
+
+        <!-- Total -->
         <div class="mt-4 text-end text-light">
             <h4>Total: €{{ cart.get_total_price }}</h4>
         </div>
+
+        <!-- Checkout Button -->
+        <div class="text-end mt-3">
+            <a href="{% url 'checkout' %}" class="btn btn-success btn-lg shadow-sm">
+                Proceed to Checkout 🧾
+            </a>
+        </div>
+        
     {% else %}
         <p class="text-light">Your cart is empty, sweet witch. Go conjure something magical 🌙</p>
     {% endif %}

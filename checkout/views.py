@@ -60,3 +60,14 @@ def checkout(request):
 
     # Render the checkout page
     return render(request, 'checkout/checkout.html', context)
+
+def checkout_success(request, order_number):
+    # Get the order by order number
+    order = get_object_or_404(Order, order_number=order_number)
+
+    # Clear the cart after successful checkout
+    cart = Cart(request)
+    cart.clear()
+
+    # Render the success page
+    return render(request, 'checkout/checkout_success.html', {'order': order})

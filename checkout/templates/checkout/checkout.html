@@ -1,7 +1,6 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 {% load static %}
 {% load crispy_forms_tags %}
-{% load json_script %}
 
 
 {% block content %}
@@ -41,7 +40,7 @@
 {% block postloadjs %}
     {{ block.super }}
     <script src="https://js.stripe.com/v3/"></script>
-    {% json_script stripe_public_key as "id_stripe_public_key" %}
-    {% json_script client_secret as "id_client_secret" %}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
     <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}

@@ -22,12 +22,14 @@ def checkout(request):
 
             # Create order line items for each item in cart
             for item in cart:
-                product = Product.objects.get(id=item['product_id'])
-                OrderLineItem.objects.create(
-                    order=order,
-                    product=product,
-                    quantity=item['quantity']
-                )
+                # Only handle line items with a product_id (skip services etc.)
+                if 'product_id' in item:
+                    product = Product.objects.get(id=item['product_id'])
+                    OrderLineItem.objects.create(
+                        order=order,
+                        product=product,
+                        quantity=item['quantity']
+                    )
 
             # Once order and items are created, redirect to success page
             return redirect('checkout_success', order_number=order.order_number)

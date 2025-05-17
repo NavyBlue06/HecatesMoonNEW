@@ -10,17 +10,23 @@ import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-
 def checkout(request):
+    # Create a Cart instance from the session
     cart = Cart(request)
 
+    # If this is a POST request, process the form
     if request.method == 'POST':
         form = OrderForm(request.POST)
+
+        # Check if form is valid
         if form.is_valid():
+            # Save order data without committing to DB yet
             order = form.save(commit=False)
             order.save()
 
+            # Create order line items for each item in cart
             for item in cart:
+                # Only handle line items with a product_id (skip services etc.)
                 if 'product_id' in item:
                     product = Product.objects.get(id=item['product_id'])
                     OrderLineItem.objects.create(
@@ -29,53 +35,28 @@ def checkout(request):
                         quantity=item['quantity']
                     )
 
+            # Once order and items are created, redirect to success page
             return redirect('checkout_success', order_number=order.order_number)
     else:
+        # If it's a GET request, show a blank form
         form = OrderForm()
 
+    # Calculate total amount in cents for Stripe
+    total = int(cart.get_total_price() * 100)
+
+    # Create PaymentIntent with Stripe
+    intent = stripe.PaymentIntent.create(
+        amount=total,
+        currency='eur',
+    )
+
+    # Context to send to the checkout template
     context = {
         'form': form,
         'cart': cart,
         'stripe_public_key': settings.STRIPE_PUBLIC_KEY,  # Required for JS
+        'client_secret': intent.client_secret,            # Needed for confirmCardPayment()
     }
 
+    # Render the checkout page
     return render(request, 'checkout/checkout.html', context)
-
-
-def checkout_success(request, order_number):
-    order = get_object_or_404(Order, order_number=order_number)
-
-    context = {
-        'order': order,
-    }
-
-    return render(request, 'checkout/checkout_success.html', context)
-
-
-@require_POST
-def create_checkout_session(request):
-    """ Create a Stripe Checkout session for client-side redirect """
-    cart = Cart(request)
-    line_items = []
-
-    for item in cart:
-        line_items.append({
-            'price_data': {
-                'currency': 'eur',
-                'unit_amount': int(item['price'] * 100),
-                'product_data': {
-                    'name': item['name'],
-                },
-            },
-            'quantity': item['quantity'],
-        })
-
-    session = stripe.checkout.Session.create(
-        payment_method_types=['card'],
-        line_items=line_items,
-        mode='payment',
-        success_url=request.build_absolute_uri('/checkout/checkout-success/') + '?session_id={CHECKOUT_SESSION_ID}',
-        cancel_url=request.build_absolute_uri('/cart/'),
-    )
-
-    return JsonResponse({'id': session.id})

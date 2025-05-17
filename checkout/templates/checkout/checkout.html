@@ -1,7 +1,6 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-
 
 {% block content %}
 <div class="container mt-5 pt-5">
@@ -9,15 +8,14 @@
 
     <div class="row">
         <div class="col-md-6">
-            <form method="POST" id="payment-form">
+            <form id="payment-form">
                 {% csrf_token %}
                 {{ form|crispy }}
 
-                <!-- Stripe Card Element -->
-                <div id="card-element" class="my-3"></div>
-                <div id="card-errors" class="text-danger mt-2" role="alert"></div>
-
-                <button type="submit" class="btn btn-success mt-2" id="pay-button">Complete Order</button>
+                <!-- Stripe Checkout Trigger Button -->
+                <button type="button" id="stripe-checkout-button" class="btn btn-success mt-2 w-100">
+                    Pay with Card
+                </button>
             </form>
         </div>
 
@@ -38,26 +36,8 @@
 {% endblock %}
 
 {% block postloadjs %}
-    {{ block.super }}
-    <script src="https://js.stripe.com/v3/"></script>
-    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
-    {{ client_secret|json_script:"id_client_secret" }}
-    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('payment-form');
-            const payButton = document.getElementById('pay-button');
-
-            if (form && payButton) {
-                payButton.disabled = false;
-
-                form.addEventListener('submit', function () {
-                    payButton.disabled = true;
-                    payButton.innerHTML = 'Processing... 🔮';
-                });
-            }
-        });
-    </script>
+{{ block.super }}
+<script src="https://js.stripe.com/v3/"></script>
+{{ stripe_public_key|json_script:"id_stripe_public_key" }}
+<script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}
-
